@@ -1,4 +1,4 @@
-package com.moseoh.danggeunclone
+package com.mosoeh.danggeunclone
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
