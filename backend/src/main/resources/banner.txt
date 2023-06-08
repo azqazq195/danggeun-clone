@@ -1,0 +1,1 @@
+${AnsiColor.BRIGHT_GREEN} :: Spring Boot${spring-boot.formatted-version} :: ${AnsiStyle.NORMAL}

@@ -1,0 +1,27 @@
+[[Auth]]
+== 계정
+
+[[sign-up]]
+=== 회원가입
+
+operation::auth/sign-up[snippets='http-request,request-fields,http-response']
+
+[[sign-in]]
+=== 로그인
+
+operation::auth/sign-in[snippets='http-request,request-fields,http-response,response-fields-data']
+
+[[sign-out]]
+=== 로그아웃
+
+operation::auth/sign-out[snippets='http-request,http-response']
+
+[[refresh]]
+=== refresh token 발급
+
+operation::auth/refresh[snippets='http-request,request-fields,http-response,response-fields-data']
+
+[[me]]
+=== 내 정보 조회
+
+operation::auth/me[snippets='http-request,http-response,response-fields-data']
