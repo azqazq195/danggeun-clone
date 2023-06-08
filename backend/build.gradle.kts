@@ -86,20 +86,11 @@ tasks {
         baseDirFollowsSourceFile()
     }
 
-    register<Copy>("copyDocs") {
-        dependsOn(asciidoctor)
-        from("${asciidoctor.get().outputDir}")
-        into("src/main/resources/static/docs")
-    }
-
     build {
-        dependsOn("copyDocs")
-    }
-
-    bootJar {
-        dependsOn("copyDocs")
-        from("${asciidoctor.get().outputDir}/index.html") {
-            into("static/docs")
+        dependsOn(asciidoctor)
+        copy {
+            from("${asciidoctor.get().outputDir}")
+            into("src/main/resources/static/docs")
         }
     }
 }

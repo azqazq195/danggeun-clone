@@ -39,3 +39,6 @@ out/
 ### Docker ###
 docker/mysql
 docker/redis
+
+### REST Docs ###
+src/main/resources/static/docs
