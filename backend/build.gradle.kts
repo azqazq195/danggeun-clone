@@ -17,6 +17,9 @@ repositories {
     mavenCentral()
 }
 
+val kotestVersion = "5.6.2"
+val jwtVersion = "0.11.5"
+
 val asciidoctorExt: Configuration by configurations.creating
 val snippetsDir by extra { "build/generated-snippets" }
 
@@ -30,9 +33,9 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     // jwt
-    implementation("io.jsonwebtoken:jjwt-api:0.11.5")
-    runtimeOnly("io.jsonwebtoken:jjwt-impl:0.11.5")
-    runtimeOnly("io.jsonwebtoken:jjwt-jackson:0.11.5")
+    implementation("io.jsonwebtoken:jjwt-api:$jwtVersion")
+    runtimeOnly("io.jsonwebtoken:jjwt-impl:$jwtVersion")
+    runtimeOnly("io.jsonwebtoken:jjwt-jackson:$jwtVersion")
 
     // database
     implementation("mysql:mysql-connector-java:8.0.32")
@@ -44,6 +47,8 @@ dependencies {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
         exclude(group = "org.mockito")
     }
+    testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
+    testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
     testImplementation("com.ninja-squad:springmockk:4.0.2")
     testImplementation("it.ozimov:embedded-redis:0.7.2")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
