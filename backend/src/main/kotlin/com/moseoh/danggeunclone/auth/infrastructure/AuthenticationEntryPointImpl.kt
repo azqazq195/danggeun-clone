@@ -1,7 +1,7 @@
 package com.moseoh.danggeunclone.auth.infrastructure
 
 import com.moseoh.danggeunclone._common.exception.ErrorCode
-import com.moseoh.danggeunclone._common.util.ExceptionUtils
+import com.moseoh.danggeunclone._common.utils.ExceptionUtils
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.core.AuthenticationException

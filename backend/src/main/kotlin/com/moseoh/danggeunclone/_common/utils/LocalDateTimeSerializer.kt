@@ -1,4 +1,4 @@
-package com.moseoh.danggeunclone._common.util
+package com.moseoh.danggeunclone._common.utils
 
 import com.fasterxml.jackson.core.JsonGenerator
 import com.fasterxml.jackson.databind.JsonSerializer

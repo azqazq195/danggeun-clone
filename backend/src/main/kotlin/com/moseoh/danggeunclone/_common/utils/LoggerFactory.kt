@@ -1,4 +1,4 @@
-package com.moseoh.danggeunclone._common.util
+package com.moseoh.danggeunclone._common.utils
 
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory

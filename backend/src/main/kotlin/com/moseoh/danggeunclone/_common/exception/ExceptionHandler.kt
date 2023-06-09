@@ -2,7 +2,7 @@ package com.moseoh.danggeunclone._common.exception
 
 import com.moseoh.danggeunclone._common.application.dto.EmptyResult
 import com.moseoh.danggeunclone._common.application.dto.ResponseDto
-import com.moseoh.danggeunclone._common.util.logger
+import com.moseoh.danggeunclone._common.utils.logger
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.http.converter.HttpMessageNotReadableException

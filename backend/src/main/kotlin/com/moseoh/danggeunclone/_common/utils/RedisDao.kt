@@ -1,4 +1,4 @@
-package com.moseoh.danggeunclone._common.util
+package com.moseoh.danggeunclone._common.utils
 
 import org.springframework.data.redis.core.RedisTemplate
 import org.springframework.stereotype.Component

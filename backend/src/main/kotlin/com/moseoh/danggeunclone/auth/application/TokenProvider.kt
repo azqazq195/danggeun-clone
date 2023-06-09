@@ -1,7 +1,7 @@
 package com.moseoh.danggeunclone.auth.application
 
-import com.moseoh.danggeunclone._common.util.RedisDao
-import com.moseoh.danggeunclone._common.util.logger
+import com.moseoh.danggeunclone._common.utils.RedisDao
+import com.moseoh.danggeunclone._common.utils.logger
 import com.moseoh.danggeunclone.auth.application.dto.RefreshTokenRequest
 import com.moseoh.danggeunclone.auth.application.dto.TokenResponse
 import com.moseoh.danggeunclone.auth.domain.Token
