@@ -23,7 +23,7 @@ class RedisConfig(
     @Bean
     fun redisTemplate(): RedisTemplate<*, *> {
         val redisTemplate = RedisTemplate<ByteArray, ByteArray>()
-        redisTemplate.setConnectionFactory(redisConnectionFactory())
+        redisTemplate.connectionFactory = redisConnectionFactory()
         return redisTemplate
     }
 }
