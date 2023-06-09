@@ -52,13 +52,15 @@ fun createSignInRequest(
 }
 
 fun createSignUpRequest(
+    name: String = "name",
     email: String = "user@example.com",
-    password: String = "password"
+    password: String = "password",
+    age: Int = 30
 ): SignUpRequest {
     return SignUpRequest(
-        name = "name",
+        name = name,
         password = password,
         email = email,
-        age = 30
+        age = age
     )
 }
