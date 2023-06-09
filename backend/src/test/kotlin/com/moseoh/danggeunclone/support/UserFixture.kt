@@ -5,22 +5,34 @@ import com.moseoh.danggeunclone.user.domain.Role
 import com.moseoh.danggeunclone.user.domain.User
 import java.time.LocalDateTime
 
-fun createUser(role: Role = Role.USER): User {
+fun createUser(
+    email: String = "user@example.com",
+    password: String = "password",
+    name: String = "사용자",
+    age: Int = 30,
+    role: Role = Role.USER
+): User {
     return User(
-        email = "${role.name.lowercase()}@example.com",
-        password = "password",
-        name = "사용자",
-        age = 30,
-        role = role,
+        email = email,
+        password = password,
+        name = name,
+        age = age,
+        role = role
     )
 }
 
-fun createUserResponse(): UserResponse {
+fun createUserResponse(
+    id: Long = 1,
+    email: String = "user@example.com",
+    role: Role = Role.USER,
+    createdAt: LocalDateTime = LocalDateTime.now(),
+    modifiedAt: LocalDateTime = LocalDateTime.now(),
+): UserResponse {
     return UserResponse(
-        id = 1,
-        email = "user@example.com",
-        role = Role.USER,
-        createdAt = LocalDateTime.now(),
-        modifiedAt = LocalDateTime.now(),
+        id = id,
+        email = email,
+        role = role,
+        createdAt = createdAt,
+        modifiedAt = modifiedAt,
     )
 }

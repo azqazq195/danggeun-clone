@@ -7,41 +7,58 @@ import com.moseoh.danggeunclone.auth.application.dto.TokenResponse
 import com.moseoh.danggeunclone.auth.domain.Token
 import java.util.*
 
-fun createToken(): Token {
+fun createToken(
+    email: String = "user@example.com",
+    accessToken: String = "accessToken",
+    refreshToken: String = "refreshToken",
+    expiredAt: Date = Date()
+): Token {
     return Token(
-        email = "user@example.com",
-        accessToken = "accessToken",
-        refreshToken = "refreshToken",
-        expiredAt = Date()
+        email = email,
+        accessToken = accessToken,
+        refreshToken = refreshToken,
+        expiredAt = expiredAt
     )
 }
 
-fun createTokenResponse(): TokenResponse {
+fun createTokenResponse(
+    accessToken: String = "accessToken",
+    refreshToken: String = "refreshToken"
+): TokenResponse {
     return TokenResponse(
-        accessToken = "accessToken",
-        refreshToken = "refreshToken"
+        accessToken = accessToken,
+        refreshToken = refreshToken
     )
 }
 
-fun createRefreshTokenRequest(): RefreshTokenRequest {
+fun createRefreshTokenRequest(
+    refreshToken: String = "refreshToken",
+    accessToken: String = "accessToken"
+): RefreshTokenRequest {
     return RefreshTokenRequest(
-        refreshToken = "refreshToken",
-        accessToken = "accessToken"
+        refreshToken = refreshToken,
+        accessToken = accessToken
     )
 }
 
-fun createSignInRequest(): SignInRequest {
+fun createSignInRequest(
+    email: String = "user@example.com",
+    password: String = "password"
+): SignInRequest {
     return SignInRequest(
-        email = "user@example.com",
-        password = "password"
+        email = email,
+        password = password
     )
 }
 
-fun createSignUpRequest(): SignUpRequest {
+fun createSignUpRequest(
+    email: String = "user@example.com",
+    password: String = "password"
+): SignUpRequest {
     return SignUpRequest(
         name = "name",
-        password = "password",
-        email = "user@example.com",
+        password = password,
+        email = email,
         age = 30
     )
 }
