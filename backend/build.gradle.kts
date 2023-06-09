@@ -41,8 +41,13 @@ dependencies {
     implementation("mysql:mysql-connector-java:8.0.32")
     implementation("org.flywaydb:flyway-core:9.17.0")
     implementation("org.flywaydb:flyway-mysql:9.17.0")
+    testImplementation("it.ozimov:embedded-redis:0.7.2")
+    testImplementation("com.h2database:h2:2.1.214")
 
+    // utils
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
+
+    // test
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
         exclude(group = "org.mockito")
@@ -50,7 +55,6 @@ dependencies {
     testImplementation("io.kotest:kotest-runner-junit5:$kotestVersion")
     testImplementation("io.kotest:kotest-assertions-core:$kotestVersion")
     testImplementation("com.ninja-squad:springmockk:4.0.2")
-    testImplementation("it.ozimov:embedded-redis:0.7.2")
     testImplementation("org.springframework.restdocs:spring-restdocs-mockmvc")
     asciidoctorExt("org.springframework.restdocs:spring-restdocs-asciidoctor")
     testImplementation("org.springframework.security:spring-security-test:6.0.3")
