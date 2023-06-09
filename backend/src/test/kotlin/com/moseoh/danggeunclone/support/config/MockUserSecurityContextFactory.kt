@@ -11,7 +11,7 @@ import org.springframework.security.test.context.support.WithSecurityContextFact
 class MockUserSecurityContextFactory : WithSecurityContextFactory<MockUser> {
     override fun createSecurityContext(annotation: MockUser): SecurityContext {
         val securityContext = SecurityContextHolder.createEmptyContext()
-        val user = createUser(annotation.role)
+        val user = createUser(role = annotation.role)
         val authorities: Collection<GrantedAuthority> = listOf(SimpleGrantedAuthority("ROLE_${user.role}"))
         val authenticationToken = UsernamePasswordAuthenticationToken(user.email, "", authorities)
         securityContext.authentication = authenticationToken
