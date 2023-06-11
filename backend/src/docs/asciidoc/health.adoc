@@ -1,0 +1,6 @@
+[[Health]]
+== Health
+
+=== check
+
+operation::health[snippets='http-request,http-response']
