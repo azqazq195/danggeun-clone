@@ -12,4 +12,8 @@ abstract class DeletableEntity : ModifiableEntity() {
     @Column(nullable = true, updatable = true)
     var deletedAt: LocalDateTime? = null
         private set
+
+    fun delete() {
+        deletedAt = LocalDateTime.now()
+    }
 }
