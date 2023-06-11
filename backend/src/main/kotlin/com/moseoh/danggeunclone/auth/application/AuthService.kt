@@ -8,6 +8,7 @@ import com.moseoh.danggeunclone.user.application.dto.UserResponse
 import com.moseoh.danggeunclone.user.domain.Role
 import com.moseoh.danggeunclone.user.domain.repository.UserRepository
 import com.moseoh.danggeunclone.user.domain.repository.getByEmail
+import com.moseoh.danggeunclone.user.exception.NotFoundUserException
 import org.springframework.security.core.Authentication
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
@@ -46,9 +47,9 @@ class AuthService(
     }
 
     fun me(auth: Authentication): UserResponse {
-        val email = auth.principal as String
+        val id = auth.principal as Long
         return userRepository
-            .getByEmail(email)
+            .findById(id).orElseThrow { NotFoundUserException() }
             .let(::UserResponse)
     }
 }

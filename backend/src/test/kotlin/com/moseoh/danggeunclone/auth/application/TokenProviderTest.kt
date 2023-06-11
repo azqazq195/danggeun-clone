@@ -8,10 +8,10 @@ import com.moseoh.danggeunclone.support.createRefreshTokenRequest
 import com.moseoh.danggeunclone.support.createToken
 import com.moseoh.danggeunclone.support.createUser
 import com.moseoh.danggeunclone.user.domain.repository.UserRepository
-import com.moseoh.danggeunclone.user.domain.repository.getByEmail
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.*
+import java.util.*
 
 internal class TokenProviderTest : BehaviorSpec({
     val accessTokenExpireTime = 720000L
@@ -75,7 +75,7 @@ internal class TokenProviderTest : BehaviorSpec({
         When("요청을 한다면") {
             every { tokenRepository.getByRefreshToken(refreshTokenRequest.refreshToken) } returns token
             every { tokenProvider["deleteByAccessToken"](token.accessToken) } returns Unit
-            every { userRepository.getByEmail(token.email) } returns user
+            every { userRepository.findById(token.userId) } returns Optional.of(user)
             every { tokenRepository.save(any()) } returns token
 
             val result = tokenProvider.refresh(refreshTokenRequest)
@@ -84,7 +84,7 @@ internal class TokenProviderTest : BehaviorSpec({
                 result shouldBe tokenResponse
 
                 verify(exactly = 1) { tokenRepository.getByRefreshToken(refreshTokenRequest.refreshToken) }
-                verify(exactly = 1) { userRepository.getByEmail(token.email) }
+                verify(exactly = 1) { userRepository.findById(token.userId) }
                 verify(exactly = 1) { tokenRepository.save(any()) }
             }
         }

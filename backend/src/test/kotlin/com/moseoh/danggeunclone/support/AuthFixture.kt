@@ -8,13 +8,13 @@ import com.moseoh.danggeunclone.auth.domain.Token
 import java.util.*
 
 fun createToken(
-    email: String = "user@example.com",
+    userId: Long = 1L,
     accessToken: String = "accessToken",
     refreshToken: String = "refreshToken",
     expiredAt: Date = Date()
 ): Token {
     return Token(
-        email = email,
+        userId = userId,
         accessToken = accessToken,
         refreshToken = refreshToken,
         expiredAt = expiredAt

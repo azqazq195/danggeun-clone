@@ -9,7 +9,7 @@ import com.moseoh.danggeunclone.auth.domain.repository.TokenRepository
 import com.moseoh.danggeunclone.auth.domain.repository.getByRefreshToken
 import com.moseoh.danggeunclone.user.domain.User
 import com.moseoh.danggeunclone.user.domain.repository.UserRepository
-import com.moseoh.danggeunclone.user.domain.repository.getByEmail
+import com.moseoh.danggeunclone.user.exception.NotFoundUserException
 import io.jsonwebtoken.*
 import io.jsonwebtoken.io.Decoders
 import io.jsonwebtoken.security.Keys
@@ -60,7 +60,7 @@ class TokenProvider(
     @Transactional
     fun create(user: User): TokenResponse {
         val token = Token(
-            email = user.email,
+            userId = user.id,
             accessToken = createAccessToken(user),
             refreshToken = createRefreshToken(user),
             expiredAt = Date(System.currentTimeMillis() + refreshTokenExpireTime)
@@ -79,18 +79,18 @@ class TokenProvider(
         val token = tokenRepository.getByRefreshToken(refreshTokenRequest.refreshToken)
         check(token.accessToken == refreshTokenRequest.accessToken) { "토큰 정보가 일치하지 않습니다." }
         deleteByAccessToken(token.accessToken)
-        return userRepository.getByEmail(token.email).let(::create)
+        return userRepository.findById(token.userId).orElseThrow { NotFoundUserException() }.let(::create)
     }
 
     fun getAuthentication(token: String): Authentication {
         val claims = getClaims(token)
-        val email = claims.subject
+        val id = claims.subject.toLong()
         val authorities: Collection<GrantedAuthority> =
             Arrays.stream(claims[ROLE].toString().split(",".toRegex()).dropLastWhile { it.isEmpty() }
                 .toTypedArray())
                 .map { role: String -> SimpleGrantedAuthority("ROLE_$role") }
                 .collect(Collectors.toList())
-        return UsernamePasswordAuthenticationToken(email, token, authorities)
+        return UsernamePasswordAuthenticationToken(id, token, authorities)
     }
 
     fun validateToken(token: String): Boolean {
@@ -121,7 +121,7 @@ class TokenProvider(
         val expiration = Date(now.time + accessTokenExpireTime)
 
         return Jwts.builder()
-            .setSubject(user.email)
+            .setSubject(user.id.toString())
             .claim(ROLE, user.role)
             .setIssuedAt(now)
             .setExpiration(expiration)
@@ -134,7 +134,7 @@ class TokenProvider(
         val expiration = Date(now.time + refreshTokenExpireTime)
 
         return Jwts.builder()
-            .setSubject(user.email)
+            .setSubject(user.id.toString())
             .claim(ROLE, user.role)
             .setIssuedAt(now)
             .setExpiration(expiration)
