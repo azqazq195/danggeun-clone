@@ -9,10 +9,13 @@ import jakarta.validation.constraints.Positive
 data class SignUpRequest(
     @field:Email
     val email: String,
+
     @field:NotBlank
     val password: String,
+
     @field:NotBlank
     val name: String,
+    
     @field:Positive
     val age: Int
 ) {
