@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank
 
 data class SignInRequest(
     @field:NotBlank
-    @field:Email
+    @field:Email(regexp = "^[\\w!#\$%&'*+/=?`{|}~^-]+(?:\\.[\\w!#\$%&'*+/=?`{|}~^-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,6}\$")
     val email: String,
 
     @field:NotBlank
