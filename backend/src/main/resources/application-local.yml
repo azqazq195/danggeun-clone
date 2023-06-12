@@ -12,7 +12,9 @@ spring:
       - classpath:db/migration/{vendor}
       - classpath:db/seed/local
 
+  sql.init.mode: always
   jpa:
+    defer-datasource-initialization: true
     hibernate:
       ddl-auto: create-drop
     properties:
