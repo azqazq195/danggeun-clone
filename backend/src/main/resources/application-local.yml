@@ -37,7 +37,7 @@ server:
 jwt:
   secret: and0LWV4YW1wbGUtYWNjZXNzLXRva2VuLXNlY3JldC1rZXk=
   # 2시간 = 2 * 60 * 60 * 1000
-  access-token-expire-time: 720000
+  access-token-expire-time: 1209600000
 
   refresh-secret: and0LWV4YW1wbGUtcmVmcmVzaC10b2tlbi1zZWNyZXQta2V5
   # 2주 = 14 * 24 * 60 * 60 * 1000
