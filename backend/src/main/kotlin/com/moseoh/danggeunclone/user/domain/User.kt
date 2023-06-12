@@ -1,11 +1,14 @@
 package com.moseoh.danggeunclone.user.domain
 
-import com.moseoh.danggeunclone._common.domain.DeletableEntity
+import com.moseoh.danggeunclone._common.domain.AuditingEntity
 import jakarta.persistence.*
-import org.springframework.util.ObjectUtils
 
 @Entity(name = "tb_user")
 data class User(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0L,
+
     @Column(length = 20, nullable = false, unique = true)
     val email: String,
 
@@ -21,9 +24,6 @@ data class User(
     @Enumerated(EnumType.STRING)
     val role: Role,
 
-    ) : DeletableEntity() {
-    fun updatedName(name: String): User {
-        return if (ObjectUtils.isEmpty(name)) this
-        else this.copy(name = name)
-    }
-}
+    @Embedded
+    val auditing: AuditingEntity = AuditingEntity(),
+)
