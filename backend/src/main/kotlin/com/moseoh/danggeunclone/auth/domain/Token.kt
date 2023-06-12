@@ -7,7 +7,7 @@ import java.util.*
 @Entity
 data class Token(
     @Id
-    val email: String,
+    val userId: Long,
     val accessToken: String,
     val refreshToken: String,
     val expiredAt: Date,

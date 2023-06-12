@@ -1,6 +1,5 @@
 package com.moseoh.danggeunclone.support
 
-import com.moseoh.danggeunclone.support.utils.filledDate
 import com.moseoh.danggeunclone.user.application.dto.UserResponse
 import com.moseoh.danggeunclone.user.domain.Role
 import com.moseoh.danggeunclone.user.domain.User
@@ -18,8 +17,9 @@ fun createUser(
         password = password,
         name = name,
         age = age,
-        role = role
-    ).filledDate()
+        role = role,
+        auditing = createCreatedAuditing()
+    )
 }
 
 fun createUserResponse(

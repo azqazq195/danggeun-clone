@@ -15,7 +15,7 @@ data class UserResponse(
         id = user.id,
         email = user.email,
         role = user.role,
-        createdAt = user.createdAt!!,
-        modifiedAt = user.modifiedAt!!
+        createdAt = user.auditing.createdAt!!,
+        modifiedAt = user.auditing.modifiedAt!!
     )
 }

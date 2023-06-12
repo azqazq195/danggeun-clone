@@ -12,6 +12,7 @@ import io.kotest.matchers.shouldBe
 import io.mockk.*
 import org.springframework.security.core.Authentication
 import org.springframework.security.crypto.password.PasswordEncoder
+import java.util.*
 
 internal class AuthServiceTest : BehaviorSpec({
     val tokenProvider = mockk<TokenProvider>()
@@ -152,15 +153,15 @@ internal class AuthServiceTest : BehaviorSpec({
         val userResponse = user.let(::UserResponse)
 
         When("요청을 한다면") {
-            every { auth.principal } returns user.email
-            every { userRepository.getByEmail(user.email) } returns user
+            every { auth.principal } returns user.id
+            every { userRepository.findById(user.id) } returns Optional.of(user)
 
             val result = authService.me(auth)
 
             Then("내 정보를 반환한다.") {
                 result shouldBe userResponse
 
-                verify(exactly = 1) { userRepository.getByEmail(user.email) }
+                verify(exactly = 1) { userRepository.findById(user.id) }
             }
         }
     }
