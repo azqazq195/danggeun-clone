@@ -5,14 +5,14 @@ import jakarta.validation.constraints.NotBlank
 
 data class UpdatePostRequest(
     @field:NotBlank
-    val title: String?,
+    val title: String,
 
     @field:NotBlank
-    val category: String?,
+    val category: String,
 
     @field:NotBlank
-    val content: String?,
+    val content: String,
 
     @field:NotBlank
-    val status: Status?
+    val status: Status
 )

@@ -36,7 +36,7 @@ class PostService(
         checkOwner(post)
         val updatedPost = post.updated(
             updatePostRequest,
-            updatePostRequest.category?.let { categoryRepository.getByName(it) }
+            categoryRepository.getByName(updatePostRequest.category)
         )
         return postRepository.save(updatedPost).let(::PostResponse)
     }
