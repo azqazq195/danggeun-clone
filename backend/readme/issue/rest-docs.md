@@ -13,3 +13,24 @@ resource/static 경로에 생성된 index.html을 복사 해 옴으로써 접근
 참조:
 
 https://narusas.github.io/2018/03/21/Asciidoc-basic.html
+
+---
+
+### 이슈
+
+> urlTemplate not found. If you are using MockMvc did you use RestDocumentationRequestBuilders to build the request?
+> java.lang.IllegalArgumentException: urlTemplate not found. If you are using MockMvc did you use
+> RestDocumentationRequestBuilders to build the request?
+
+`rest docs` 생성 시 `pathParamters` 를 사용하면 에러가 발생했다.
+
+### 해결
+
+공식 문서에 `pathParamters` 사용시 `MockMvcRequestBuilders` 대신 `RestDocumentationRequestBuilders` 를 사용하라고 한다.
+
+> To make the path parameters available for documentation, the request must be built using one of the methods on
+> RestDocumentationRequestBuilders rather than MockMvcRequestBuilders.
+
+참조:
+
+https://docs.spring.io/spring-restdocs/docs/1.0.0.BUILD-SNAPSHOT/reference/html5/#documenting-your-api-path-parameters
