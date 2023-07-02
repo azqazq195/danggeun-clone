@@ -15,3 +15,4 @@ TODO
 - [x] 권한 구현
 - [ ] controller test kotest 로 변경
 - [ ] restdocs 불필요한 header 제거 및 token header 추가
+- [ ] main/resource/static/docs/*.html 깃에 올려보고 깃에서 볼 수 있는지 확인하기
