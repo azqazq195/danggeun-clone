@@ -42,7 +42,7 @@ class PostController(
         )
     }
 
-    @PatchMapping("/{id}")
+    @PutMapping("/{id}")
     fun update(
         @PathVariable id: Long,
         @RequestBody @Valid updatePostRequest: UpdatePostRequest,

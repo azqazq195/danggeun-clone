@@ -1,5 +1,11 @@
 # init sql
 
+### 이슈
+
+Jpa auto-ddl 설정으로 테이블 생명주기를 관리할 경우 Spring 에서 제공하는 sql init 과 주기가 맞지 안하 충돌이 발생한다.
+
+### 해결
+
 Spring Boot 에서는 서버 실행시 init sql 스크립트 실행을 지원한다.
 기본 경로는 classpath: schema.sql, data.sql 이다.
 

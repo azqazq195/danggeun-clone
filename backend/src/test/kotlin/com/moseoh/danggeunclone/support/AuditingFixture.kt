@@ -5,9 +5,9 @@ import org.springframework.test.util.ReflectionTestUtils
 import java.time.LocalDateTime
 
 fun createCreatedAuditing(
-    createdBy: Long = 0L,
+    createdBy: Long = 1L,
     createdAt: LocalDateTime = LocalDateTime.now(),
-    modifiedBy: Long = 0L,
+    modifiedBy: Long = 1L,
     modifiedAt: LocalDateTime = LocalDateTime.now(),
 ): AuditingEntity {
     val auditingEntity = AuditingEntity()

@@ -1,5 +1,6 @@
 package com.moseoh.danggeunclone.post.application
 
+import com.moseoh.danggeunclone._common.utils.AuthUtils
 import com.moseoh.danggeunclone.post.application.dto.CreatePostRequest
 import com.moseoh.danggeunclone.post.application.dto.PostResponse
 import com.moseoh.danggeunclone.post.application.dto.UpdatePostRequest
@@ -8,7 +9,6 @@ import com.moseoh.danggeunclone.post.domain.repository.CategoryRepository
 import com.moseoh.danggeunclone.post.domain.repository.PostRepository
 import com.moseoh.danggeunclone.post.domain.repository.getByName
 import com.moseoh.danggeunclone.post.exception.NotFoundPostException
-import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -33,9 +33,10 @@ class PostService(
     @Transactional
     fun update(id: Long, updatePostRequest: UpdatePostRequest): PostResponse {
         val post = postRepository.findById(id).orElseThrow(::NotFoundPostException)
+        checkOwner(post)
         val updatedPost = post.updated(
             updatePostRequest,
-            updatePostRequest.category?.let { categoryRepository.getByName(it) }
+            categoryRepository.getByName(updatePostRequest.category)
         )
         return postRepository.save(updatedPost).let(::PostResponse)
     }
@@ -43,12 +44,11 @@ class PostService(
     @Transactional
     fun delete(id: Long) {
         val post = postRepository.findById(id).orElseThrow(::NotFoundPostException)
-        checkCreatedBy(post)
+        checkOwner(post)
         postRepository.delete(post)
     }
 
-    fun checkCreatedBy(post: Post) {
-        val userId = SecurityContextHolder.getContext().authentication.principal as Long
-        check(post.auditing.createdBy == userId) { "게시글 작성자가 아닙니다." }
+    private fun checkOwner(post: Post) {
+        check(post.auditing.createdBy == AuthUtils.loginUserId) { "게시글 작성자가 아닙니다." }
     }
 }

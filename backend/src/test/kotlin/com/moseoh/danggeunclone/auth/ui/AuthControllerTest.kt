@@ -10,9 +10,11 @@ import io.mockk.just
 import io.mockk.runs
 import org.junit.jupiter.api.Test
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.get
+import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post
 import org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath
-import org.springframework.test.web.servlet.get
-import org.springframework.test.web.servlet.post
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
+
 
 @WebMvcTest(AuthController::class)
 class AuthControllerTest : RestControllerTest() {
@@ -22,23 +24,24 @@ class AuthControllerTest : RestControllerTest() {
 
     @Test
     fun signIn() {
+        val request = createSignInRequest()
         val response = createTokenResponse()
         every { authService.signIn(any()) } returns response
 
-        mockMvc.post("/auth/sign-in") {
-            jsonContent(createSignInRequest())
-        }.andExpect {
-            status { isOk() }
-            content { success(response) }
+        mockMvc.perform(
+            post("/auth/sign-in")
+                .jsonContent(request)
+        ).andExpect {
+            status().isOk
+            success(response)
         }.andDo {
             document(
-                "auth/sign-in",
-                null,
-                listOf(
+                identifier = "auth/sign-in",
+                requestFields = listOf(
                     fieldWithPath("email").description("이메일"),
                     fieldWithPath("password").description("비밀번호"),
                 ),
-                listOf(
+                responseFields = listOf(
                     fieldWithPath("accessToken").description("Access Token"),
                     fieldWithPath("refreshToken").description("Refresh Token"),
                 ),
@@ -51,63 +54,63 @@ class AuthControllerTest : RestControllerTest() {
     fun signOut() {
         every { authService.signOut(any()) } just runs
 
-        mockMvc.get("/auth/sign-out") {
-            bearer("valid_token")
-        }.andExpect {
-            status { isOk() }
-            content { success() }
+        mockMvc.perform(
+            get("/auth/sign-out")
+                .bearer()
+        ).andExpect {
+            status().isOk
+            success()
         }.andDo {
             document(
-                "auth/sign-out",
+                identifier = "auth/sign-out",
             )
         }
     }
 
     @Test
     fun signUp() {
+        val request = createSignInRequest()
         every { authService.signUp(any()) } just runs
 
-        mockMvc.post("/auth/sign-up") {
-            jsonContent(createSignUpRequest())
-        }.andExpect {
-            status { isCreated() }
-            content { success() }
+        mockMvc.perform(
+            post("/auth/sign-up")
+                .jsonContent(request)
+        ).andExpect {
+            status().isCreated
+            success()
         }.andDo {
             document(
-                "auth/sign-up",
-                null,
-                listOf(
+                identifier = "auth/sign-up",
+                requestFields = listOf(
                     fieldWithPath("email").description("이메일"),
                     fieldWithPath("password").description("비밀번호"),
                     fieldWithPath("name").description("이름"),
                     fieldWithPath("age").description("나이").optional(),
                 ),
-                null
             )
         }
     }
 
     @Test
     fun refresh() {
-        // given
         val request = createRefreshTokenRequest()
         val response = createTokenResponse()
         every { authService.refresh(request) } returns response
 
-        mockMvc.post("/auth/refresh") {
-            jsonContent(request)
-        }.andExpect {
-            status { isOk() }
-            content { success(response) }
+        mockMvc.perform(
+            post("/auth/refresh")
+                .jsonContent(request)
+        ).andExpect {
+            status().isOk
+            success(response)
         }.andDo {
             document(
-                "auth/refresh",
-                null,
-                listOf(
+                identifier = "auth/refresh",
+                requestFields = listOf(
                     fieldWithPath("accessToken").description("Access Token"),
                     fieldWithPath("refreshToken").description("Refresh Token"),
                 ),
-                listOf(
+                responseFields = listOf(
                     fieldWithPath("accessToken").description("Access Token"),
                     fieldWithPath("refreshToken").description("Refresh Token"),
                 ),
@@ -121,17 +124,16 @@ class AuthControllerTest : RestControllerTest() {
         val response = createUserResponse()
         every { authService.me(any()) } returns response
 
-        mockMvc.get("/auth/me") {
-            bearer("valid_token")
-        }.andExpect {
-            status { isOk() }
-            content { success(response) }
+        mockMvc.perform(
+            get("/auth/me")
+                .bearer()
+        ).andExpect {
+            status().isOk
+            success(response)
         }.andDo {
             document(
-                "auth/me",
-                null,
-                null,
-                listOf(
+                identifier = "auth/me",
+                responseFields = listOf(
                     fieldWithPath("id").description("ID"),
                     fieldWithPath("email").description("이메일"),
                     fieldWithPath("role").description("역할"),
@@ -139,7 +141,6 @@ class AuthControllerTest : RestControllerTest() {
                     fieldWithPath("modifiedAt").description("수정 시간"),
                 ),
             )
-        }.andReturn().response
+        }
     }
-
 }

@@ -1,11 +1,11 @@
 TODO
 
 - [x] test 시 database, cache-storage in-memory 처리
-- [ ] 폴더 정리
-- [ ] test 코드 작성
-- [ ] rest docs 작성
+- [x] 폴더 정리
+- [x] test 코드 작성
+- [x] rest docs 작성
 - [ ] redis restTemplate 분리해서 얻는 이점은? (blacklist)
-- [ ] readme 정리
+- [x] readme 정리
 - [ ] refresh token redis repository 로 변경
 - [x] refresh token 구현
 - [x] refresh token 을 이용한 access token 재발급 구현
@@ -13,3 +13,6 @@ TODO
 - [x] 코드 정리
 - [x] token expired time 수정
 - [x] 권한 구현
+- [ ] controller test kotest 로 변경
+- [ ] restdocs 불필요한 header 제거 및 token header 추가
+- [ ] main/resource/static/docs/*.html 깃에 올려보고 깃에서 볼 수 있는지 확인하기
