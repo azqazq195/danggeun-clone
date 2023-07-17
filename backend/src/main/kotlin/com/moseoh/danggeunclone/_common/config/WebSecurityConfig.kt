@@ -26,30 +26,28 @@ class WebSecurityConfig(
     @Throws(Exception::class)
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         return http
-            .csrf().disable()
-            .formLogin().disable()
-            .rememberMe().disable()
-            .logout().disable()
-            .httpBasic().disable()
+            .csrf { it.disable() }
+            .formLogin { it.disable() }
+            .rememberMe { it.disable() }
+            .logout { it.disable() }
+            .httpBasic { it.disable() }
+            .sessionManagement {
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            }
+            .authorizeHttpRequests {
+                it.requestMatchers("/health").permitAll()
+                it.requestMatchers("/health").permitAll()
+                it.requestMatchers("/auth/sign-in").permitAll()
+                it.requestMatchers("/auth/sign-up").permitAll()
+                it.requestMatchers("/auth/refresh").permitAll()
+                it.requestMatchers("/**").hasAnyRole("USER", "ADMIN")
 
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
-            .and()
-            .authorizeHttpRequests()
-            .requestMatchers("/health").permitAll()
-            .requestMatchers("/auth/sign-in").permitAll()
-            .requestMatchers("/auth/sign-up").permitAll()
-            .requestMatchers("/auth/refresh").permitAll()
-            .requestMatchers("/**").hasAnyRole("USER", "ADMIN")
-            .anyRequest().authenticated()
-
-            .and()
-            .exceptionHandling()
-            .authenticationEntryPoint(authenticationEntryPointImpl) // 401 에러 핸들링
-            .accessDeniedHandler(accessDeniedHandlerImpl) // 403 에러 핸들링
-
-            .and()
+                it.anyRequest().authenticated()
+            }
+            .exceptionHandling {
+                it.authenticationEntryPoint(authenticationEntryPointImpl)
+                it.accessDeniedHandler(accessDeniedHandlerImpl)
+            }
             .addFilterBefore(
                 JwtAuthenticationFilter(tokenProvider),
                 UsernamePasswordAuthenticationFilter::class.java

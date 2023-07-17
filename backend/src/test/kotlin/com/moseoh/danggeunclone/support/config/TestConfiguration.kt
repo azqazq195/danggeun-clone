@@ -12,20 +12,17 @@ class TestConfiguration {
     @Bean
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         return http
-            .csrf().disable()
-            .formLogin().disable()
-            .rememberMe().disable()
-            .logout().disable()
-            .httpBasic().disable()
-
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-
-            .and()
-            .authorizeHttpRequests()
-            .requestMatchers("/**").permitAll()
-
-            .and()
+            .csrf { it.disable() }
+            .formLogin { it.disable() }
+            .rememberMe { it.disable() }
+            .logout { it.disable() }
+            .httpBasic { it.disable() }
+            .sessionManagement {
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            }
+            .authorizeHttpRequests {
+                it.requestMatchers("/**").permitAll()
+            }
             .build()
     }
 
