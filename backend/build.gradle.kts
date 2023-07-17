@@ -41,8 +41,8 @@ dependencies {
     implementation("mysql:mysql-connector-java:8.0.32")
     implementation("org.flywaydb:flyway-core:9.17.0")
     implementation("org.flywaydb:flyway-mysql:9.17.0")
-    testImplementation("it.ozimov:embedded-redis:0.7.2")
-    testImplementation("com.h2database:h2:2.1.214")
+    runtimeOnly("it.ozimov:embedded-redis:0.7.3")
+    runtimeOnly("com.h2database:h2:2.2.220")
 
     // utils
     implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
