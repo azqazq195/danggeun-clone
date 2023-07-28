@@ -1,7 +1,0 @@
-[[Post]]
-== 게시글
-
-[[get]]
-=== 조회
-
-operation::post/{id}[snippets='http-request,path-parameters,response-body,response-fields-data']
