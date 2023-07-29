@@ -10,5 +10,10 @@ spring:
       host: localhost
       port: 6379
 
-server:
-  port: 8080
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
