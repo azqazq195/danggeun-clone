@@ -2,6 +2,7 @@ package com.moseoh.danggeunclone.api
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.domain.EntityScan
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan
 import org.springframework.boot.runApplication
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.http.HttpStatus
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController
 @SpringBootApplication
 @ComponentScan("com.moseoh.danggeunclone")
 @EntityScan("com.moseoh.danggeunclone.core")
+@ConfigurationPropertiesScan("com.moseoh.danggeunclone")
 class DanggeunCloneApplication
 
 fun main(args: Array<String>) {
