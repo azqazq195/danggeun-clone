@@ -7,5 +7,6 @@ import java.util.*
 
 @Repository
 interface TokenRepository : CrudRepository<Token, Long> {
+    fun findByAccessToken(accessToken: String): Optional<Token>
     fun findByRefreshToken(refreshToken: String): Optional<Token>
 }
