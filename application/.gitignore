@@ -39,8 +39,3 @@ out/
 ### Docker ###
 docker/mysql
 docker/redis
-
-### MarkDown ###
-### 마크 다운은 위키에 업로드한다. ###
-
-module-*/**/*.md
