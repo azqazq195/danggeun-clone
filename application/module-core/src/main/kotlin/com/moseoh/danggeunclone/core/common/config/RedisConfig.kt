@@ -1,6 +1,6 @@
 package com.moseoh.danggeunclone.core.common.config
 
-import com.moseoh.danggeunclone.core.common.environment.RedisProperties
+import org.springframework.boot.autoconfigure.data.redis.RedisProperties
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.redis.connection.RedisConnectionFactory
