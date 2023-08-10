@@ -1,19 +1,14 @@
 package com.moseoh.danggeunclone.core.domain.repository
 
-import com.moseoh.danggeunclone.core.EmbeddedRedisConfig
 import com.moseoh.danggeunclone.core.TokenFixture
-import io.kotest.core.spec.style.BehaviorSpec
+import com.moseoh.danggeunclone.core.common.RedisRepositoryTest
 import io.kotest.matchers.shouldBe
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest
-import org.springframework.context.annotation.Import
 import java.util.*
 
-@DataRedisTest
-@Import(EmbeddedRedisConfig::class)
 class TokenRepositoryTest @Autowired constructor(
     private val tokenRepository: TokenRepository,
-) : BehaviorSpec({
+) : RedisRepositoryTest({
     Given("findByRefreshToken") {
         val token = TokenFixture.createEntity()
         tokenRepository.save(token)

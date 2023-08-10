@@ -1,18 +1,14 @@
 package com.moseoh.danggeunclone.core.domain.repository
 
 import com.moseoh.danggeunclone.core.UserFixture
-import io.kotest.core.spec.style.BehaviorSpec
+import com.moseoh.danggeunclone.core.common.JpaRepositoryTest
 import io.kotest.matchers.shouldBe
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import java.util.*
 
-@DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class UserRepositoryTest @Autowired constructor(
     private val userRepository: UserRepository,
-) : BehaviorSpec({
+) : JpaRepositoryTest({
 
     Given("existsByEmail") {
         val user = UserFixture.createEntity()

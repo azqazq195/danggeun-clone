@@ -1,18 +1,13 @@
 package com.moseoh.danggeunclone.core.domain.repository
 
 import com.moseoh.danggeunclone.core.BlackListTokenFixtures
-import com.moseoh.danggeunclone.core.EmbeddedRedisConfig
-import io.kotest.core.spec.style.BehaviorSpec
+import com.moseoh.danggeunclone.core.common.RedisRepositoryTest
 import io.kotest.matchers.shouldBe
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest
-import org.springframework.context.annotation.Import
 
-@DataRedisTest
-@Import(EmbeddedRedisConfig::class)
 class BlackListTokenRepositoryTest @Autowired constructor(
     private val blackListTokenRepository: BlackListTokenRepository,
-) : BehaviorSpec({
+) : RedisRepositoryTest({
     Given("existsByAccessToken") {
         val token = BlackListTokenFixtures.createEntity()
         blackListTokenRepository.save(token)
@@ -33,5 +28,4 @@ class BlackListTokenRepositoryTest @Autowired constructor(
             }
         }
     }
-
 })
