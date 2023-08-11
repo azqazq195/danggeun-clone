@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   cache:
-    container_name: cache
+    container_name: carrot-cache
     platform: linux/amd64
     image: redis:7.0.11
     ports:
@@ -11,7 +11,7 @@ services:
       - ./redis/volume:/data
 
   database:
-    container_name: database
+    container_name: carrot-database
     platform: linux/amd64
     image: mysql:8.0.33
     ports:
@@ -22,9 +22,9 @@ services:
       --collation-server=utf8mb4_unicode_ci
     environment:
       - MYSQL_ROOT_PASSWORD=root
-      - MYSQL_DATABASE=danggeun
-      - MYSQL_USER=danggeun
-      - MYSQL_PASSWORD=danggeun
+      - MYSQL_DATABASE=carrot
+      - MYSQL_USER=carrot
+      - MYSQL_PASSWORD=carrot
       - TZ=Asia/Seoul
     volumes:
       - ./mysql/volume:/var/lib/mysql
