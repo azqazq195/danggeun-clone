@@ -1,0 +1,5 @@
+- [x] Token Redis 저장 삭제 어떻게 되는지 알아보기
+- [ ] @jakarta.persistence.Id vs @org.springframework.data.annotation.Id 정리
+- [x] id 'java-test-fixtures'
+- [ ] SpringBootApplication scanBase vs ComponentScan
+- [ ] AccessDeniedHandler 필요성, 정리, 인증 인가 처리 알아보기
