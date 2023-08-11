@@ -1,5 +1,6 @@
 package com.moseoh.carrot.helper
 
+import com.moseoh.carrot.helper.constraints.DataRedisTestWithConfig
 import io.kotest.core.spec.style.BehaviorSpec
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Qualifier

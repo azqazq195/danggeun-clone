@@ -1,5 +1,6 @@
-package com.moseoh.carrot.helper
+package com.moseoh.carrot.helper.constraints
 
+import com.moseoh.carrot.helper.config.EmbeddedRedisConfig
 import org.springframework.boot.test.autoconfigure.data.redis.DataRedisTest
 import org.springframework.context.annotation.Import
 

@@ -1,5 +1,6 @@
 package com.moseoh.carrot.helper
 
+import com.moseoh.carrot.helper.constraints.DataJpaTestWithConfig
 import io.kotest.core.spec.style.BehaviorSpec
 
 @DataJpaTestWithConfig
