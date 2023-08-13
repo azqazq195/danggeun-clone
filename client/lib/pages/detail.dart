@@ -25,9 +25,11 @@ class _DetailArticleViewState extends State<DetailArticleView>
   late Size _size;
   late int _current;
   ScrollController _scrollController = ScrollController();
+
   // AppBar backgroundColor Alpha 값
   double _locationAlpha = 0;
   late AnimationController _animationController;
+
   // AppBar에서 리딩버튼(뒤로가기), [공유], [더 보기] 액션 버튼의 Color 애니매이션 (to: white, from: black)
   late Animation _colorTween;
   bool _isMyFavoriteContent = false;
@@ -210,16 +212,16 @@ class _DetailArticleViewState extends State<DetailArticleView>
         children: [
           CircleAvatar(
             radius: 25,
-            backgroundImage: widget.articles.profile.photo == null
+            backgroundImage: widget.articles.profile.profileUrl == null
                 ? Image.asset("assets/images/user.png").image
-                : Image.asset(widget.articles.profile.photo!).image,
+                : Image.asset(widget.articles.profile.profileUrl!).image,
           ),
           SizedBox(width: 10),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                widget.articles.profile.nickName,
+                widget.articles.profile.nickname,
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               Text(
@@ -347,7 +349,7 @@ class _DetailArticleViewState extends State<DetailArticleView>
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "${widget.articles.profile.nickName}님의 판매 상품",
+                "${widget.articles.profile.nickname}님의 판매 상품",
                 style: TextStyle(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,

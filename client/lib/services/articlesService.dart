@@ -30,8 +30,8 @@ class ArticlesService {
   Future<List<Articles>> fetchArticlesByProfile(
       http.Client client, Profile profile) async {
     // http://arong.info:7004/ArticlesByPhonenum?phoneNum=01011112222
-    var url = Uri.http(
-        _baseURL, '/ArticlesByPhonenum', {'phoneNum': profile.phoneNum});
+    var url =
+        Uri.http(_baseURL, '/ArticlesByPhonenum', {'phoneNum': profile.phone});
     final response = await client.get(url);
     if (response.statusCode == 200) {
       return parseArticles(response.body);

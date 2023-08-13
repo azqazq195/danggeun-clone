@@ -1,31 +1,31 @@
 class Profile {
   final String id;
-  final String phoneNum;
   final String email;
-  final String nickName;
-  final String? photo;
+  final String nickname;
+  final String phone;
+  final String? profileUrl;
   final double temperature;
-  final List<String> town;
+  final List<String> regions;
 
-  Profile(this.id, this.phoneNum, this.email, this.nickName, this.photo,
-      this.temperature, this.town);
+  Profile(this.id, this.phone, this.email, this.nickname, this.profileUrl,
+      this.temperature, this.regions);
 
   Profile.fromJson(Map<String, dynamic> json)
-      : id = json['id'],
-        phoneNum = json['phoneNum'],
+      : id = json['id'].toString(),
+        phone = json['phone'],
         email = json['email'],
-        nickName = json['nickName'],
-        photo = json['photo'],
+        nickname = json['nickname'],
+        profileUrl = json['profileUrl'],
         temperature = json['temperature'].toDouble(),
-        town = json['town'].cast<String>();
+        regions = json['regions'].cast<String>();
 
   Map<String, dynamic> toJson() => {
         'id': id,
-        'phoneNum': phoneNum,
+        'phone': phone,
         'email': email,
-        'nickName': nickName,
-        'photo': photo,
+        'nickname': nickname,
+        'profileUrl': profileUrl,
         'temperature': temperature,
-        'town': town,
+        'regions': regions,
       };
 }

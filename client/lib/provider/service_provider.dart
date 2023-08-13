@@ -58,15 +58,15 @@ class ServiceProvider extends ChangeNotifier {
   // get, set 프로퍼티 END
 
   // 계정 데이터 요청
-  fetchProfile(String phone) async {
-    var profile = await _accountService.fetchProfile(http.Client(), phone);
+  fetchProfile() async {
+    var profile = await _accountService.fetchProfile(http.Client());
     _profile = profile;
-    if (_profile != null && _profile!.town.isNotEmpty) {
+    if (_profile != null && _profile!.regions.isNotEmpty) {
       // 등록된 관심상품 데이터 요청, 관심상품이 없다면 _itemFavorites is null
       await fetchItemFavorites();
 
       // 현재 선택된 동네
-      _currentTown = _profile!.town[0];
+      _currentTown = _profile!.regions[0];
       // 선택된 동네의 판매 상품 정보 데이터 요청
       await fetchArticles(_currentTown!);
       notifyListeners();
@@ -123,7 +123,7 @@ class ServiceProvider extends ChangeNotifier {
 
   // 판매자 게시글 데이터 조회
   fetchArticlesByProfile(Profile profile) async {
-    print('판매자 게시글 데이터 요청 - ${profile.phoneNum}');
+    print('판매자 게시글 데이터 요청 - ${profile.phone}');
 
     var sellerArticles =
         await _articlesService.fetchArticlesByProfile(http.Client(), profile);
@@ -140,7 +140,7 @@ class ServiceProvider extends ChangeNotifier {
       return;
     }
 
-    print('등록한 관심상품 데이터 요청 - ${_profile!.phoneNum}');
+    print('등록한 관심상품 데이터 요청 - ${_profile!.phone}');
 
     var favoritesArticles =
         await _articlesService.fetchFavoritesArticles(http.Client(), _profile!);
@@ -157,7 +157,7 @@ class ServiceProvider extends ChangeNotifier {
       return;
     }
 
-    print('판매중인 데이터 요청 - ${_profile!.phoneNum}');
+    print('판매중인 데이터 요청 - ${_profile!.phone}');
 
     var salesHistoryArticles =
         await _articlesService.fetchArticlesByProfile(http.Client(), _profile!);
@@ -170,7 +170,7 @@ class ServiceProvider extends ChangeNotifier {
   // 중고물품 데이터 등록 요청
   Future<bool> addArticle(
       List<MultipartFile> uplopadImages, Articles article) async {
-    print('중고물품 데이터 등록 요청 - ${_profile!.phoneNum}');
+    print('중고물품 데이터 등록 요청 - ${_profile!.phone}');
 
     var result = await _articlesService.addArticle(
         http.Client(), uplopadImages, article);
