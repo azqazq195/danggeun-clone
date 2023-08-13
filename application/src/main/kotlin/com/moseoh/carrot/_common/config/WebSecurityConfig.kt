@@ -14,6 +14,9 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher
+import org.springframework.web.cors.CorsConfiguration
+import org.springframework.web.cors.CorsConfigurationSource
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 
 @Configuration
 @EnableWebSecurity
@@ -27,6 +30,7 @@ class WebSecurityConfig(
     fun filterChain(http: HttpSecurity): SecurityFilterChain {
         return http
             .csrf { it.disable() }
+            .cors { it.configurationSource(corsConfigurationSource()) }
             .formLogin { it.disable() }
             .rememberMe { it.disable() }
             .logout { it.disable() }
@@ -59,5 +63,19 @@ class WebSecurityConfig(
             web.ignoring().requestMatchers(AntPathRequestMatcher("/h2-console/**"))
             web.ignoring().requestMatchers(AntPathRequestMatcher("/docs/**"))
         }
+    }
+
+    fun corsConfigurationSource(): CorsConfigurationSource {
+        val configuration = CorsConfiguration()
+
+        configuration.addAllowedOrigin("http://localhost:62467");
+        configuration.addAllowedHeader("*");
+        configuration.addAllowedMethod("*");
+        configuration.maxAge = 3600L
+        configuration.allowCredentials = true
+
+        val source = UrlBasedCorsConfigurationSource()
+        source.registerCorsConfiguration("/**", configuration);
+        return source
     }
 }
