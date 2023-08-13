@@ -40,8 +40,8 @@ class AuthControllerTest : RestControllerTest() {
                 "password" fieldType STRING means "비밀번호" isOptional false,
             ),
             responseBody(
-                "content.accessToken" fieldType STRING means "accessToken",
-                "content.refreshToken" fieldType STRING means "refreshToken"
+                "accessToken" fieldType STRING means "Access Token",
+                "refreshToken" fieldType STRING means "Refresh Token"
             )
         )
     }
@@ -103,12 +103,12 @@ class AuthControllerTest : RestControllerTest() {
         result.makeDocument(
             "auth/refresh",
             requestBody(
-                "accessToken" fieldType STRING means "accessToken" isOptional false,
-                "refreshToken" fieldType STRING means "refreshToken" isOptional false,
+                "accessToken" fieldType STRING means "Access Token" isOptional false,
+                "refreshToken" fieldType STRING means "Refresh Token" isOptional false,
             ),
             responseBody(
-                "content.accessToken" fieldType STRING means "accessToken",
-                "content.refreshToken" fieldType STRING means "refreshToken"
+                "accessToken" fieldType STRING means "Access Token",
+                "refreshToken" fieldType STRING means "Refresh Token"
             )
         )
     }
@@ -129,12 +129,12 @@ class AuthControllerTest : RestControllerTest() {
         result.makeDocument(
             "auth/me",
             responseBody(
-                "content.id" fieldType NUMBER means "사용자 ID",
-                "content.email" fieldType STRING means "이메일",
-                "content.nickname" fieldType STRING means "닉네임",
-                "content.role" fieldType STRING means "역할",
-                "content.createdAt" fieldType DATETIME means "생성 시간",
-                "content.modifiedAt" fieldType DATETIME means "수정 시간"
+                "id" fieldType NUMBER means "사용자 ID",
+                "email" fieldType STRING means "이메일",
+                "nickname" fieldType STRING means "닉네임",
+                "role" fieldType STRING means "역할",
+                "createdAt" fieldType DATETIME means "생성 시간",
+                "modifiedAt" fieldType DATETIME means "수정 시간"
             )
         )
     }
