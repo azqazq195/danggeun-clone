@@ -1,18 +1,23 @@
 package com.moseoh.carrot.domain.user.entity
 
 import com.moseoh.carrot._common.entity.BaseTimeEntity
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.EnumType
-import jakarta.persistence.Enumerated
+import jakarta.persistence.*
 
 @Entity
 class User(
+    role: Role = Role.USER,
     email: String,
     password: String,
     nickname: String,
-    role: Role = Role.USER,
+    phone: String,
+    profileUrl: String? = null,
+    regions: List<Region>
 ) : BaseTimeEntity() {
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    var role: Role = role
+        private set
+
     @Column(unique = true)
     var email: String = email
         private set
@@ -25,8 +30,24 @@ class User(
     var nickname: String = nickname
         private set
 
-    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    var role: Role = role
+    var phone: String = phone
+        private set
+
+    @Column(nullable = true)
+    var profileUrl: String? = profileUrl
+        private set
+
+    @Column(nullable = false)
+    var temperature: Double = 36.0
+        private set
+
+    @ManyToMany(cascade = [CascadeType.PERSIST])
+    @JoinTable(
+        name = "user_regions",
+        joinColumns = [JoinColumn(name = "user_id")],
+        inverseJoinColumns = [JoinColumn(name = "region_id")]
+    )
+    var regions: List<Region> = regions
         private set
 }

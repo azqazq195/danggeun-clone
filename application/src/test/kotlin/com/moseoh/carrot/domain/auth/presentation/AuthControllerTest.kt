@@ -82,6 +82,9 @@ class AuthControllerTest : RestControllerTest() {
                 "email" fieldType STRING means "이메일" isOptional false,
                 "password" fieldType STRING means "비밀번호" isOptional false,
                 "nickname" fieldType STRING means "닉네임" isOptional false,
+                "phone" fieldType STRING means "핸드폰 번호" isOptional false,
+                "profileUrl" fieldType STRING means "프로필 URL" isOptional true,
+                "regionIds" fieldType ARRAY means "지역 IDs" isOptional true,
             ),
         )
     }
@@ -130,9 +133,13 @@ class AuthControllerTest : RestControllerTest() {
             "auth/me",
             responseBody(
                 "id" fieldType NUMBER means "사용자 ID",
+                "role" fieldType STRING means "역할",
                 "email" fieldType STRING means "이메일",
                 "nickname" fieldType STRING means "닉네임",
-                "role" fieldType STRING means "역할",
+                "phone" fieldType STRING means "핸드폰 번호",
+                "profileUrl" fieldType STRING means "프로필 URL",
+                "temperature" fieldType NUMBER means "온도",
+                "regions" fieldType ARRAY means "지역",
                 "createdAt" fieldType DATETIME means "생성 시간",
                 "modifiedAt" fieldType DATETIME means "수정 시간"
             )
