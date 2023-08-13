@@ -26,7 +26,11 @@ fun requestBody(vararg fields: RestDocField): RequestFieldsSnippet =
     PayloadDocumentation.requestFields(fields.map { it.descriptor })
 
 fun responseBody(vararg fields: RestDocField): ResponseFieldsSnippet =
-    PayloadDocumentation.relaxedResponseFields(fields.map { it.descriptor })
+    PayloadDocumentation.responseFields(
+        PayloadDocumentation.beneathPath("content").withSubsectionId("content"),
+        fields.map { it.descriptor }
+    )
+
 
 /**
  * query, path parameters
