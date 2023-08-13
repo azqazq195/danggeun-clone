@@ -1,13 +1,10 @@
 spring:
-  config:
-    activate:
-      on-profile: local
-
   datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/carrot
-    username: carrot
-    password: carrot
+    hikari:
+      driver-class-name: org.h2.Driver
+      jdbc-url: jdbc:h2:mem:testdb;MODE=MySQL;DB_CLOSE_DELAY=-1;NON_KEYWORDS=user
+      username: custom-h2database
+      password:
 
   data:
     redis:
@@ -15,12 +12,15 @@ spring:
       port: 6379
 
   jpa:
-    hibernate:
-      ddl-auto: create-drop
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
-    show-sql: true
+
+logging:
+  level:
+    org.springframework.orm.jpa: DEBUG
+    org.springframework.transaction: DEBUG
 
 jwt:
   access-secret: and0LWV4YW1wbGUtYWNjZXNzLXRva2VuLXNlY3JldC1rZXk=

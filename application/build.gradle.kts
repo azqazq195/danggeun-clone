@@ -47,7 +47,7 @@ dependencies {
     implementation("mysql:mysql-connector-java:8.0.32")
 
     /**
-     * TEST Dependency
+     * TEST Dependencies
      */
 
     // spring
@@ -75,6 +75,12 @@ dependencies {
     testImplementation("it.ozimov:embedded-redis:0.7.3") {
         exclude(group = "org.slf4j", module = "slf4j-simple")
     }
+
+    /**
+     * TEST FIXTURES Dependencies
+     */
+    // test fixtures directory 에서 spring security 를 사용하기 위함 `testFixturesImplementation`
+    testFixturesImplementation("org.springframework.security:spring-security-test")
 }
 
 tasks {
