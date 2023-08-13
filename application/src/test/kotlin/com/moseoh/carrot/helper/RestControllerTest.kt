@@ -2,9 +2,11 @@ package com.moseoh.carrot.helper
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.moseoh.carrot.UserFixture
+import com.moseoh.carrot.helper.config.TestWebSecurityConfig
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
+import org.springframework.context.annotation.Import
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -16,6 +18,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.GrantedAuthority
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.ResultActions
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder
@@ -28,6 +31,7 @@ import org.springframework.web.filter.CharacterEncodingFilter
 
 @AutoConfigureRestDocs
 @ExtendWith(RestDocumentationExtension::class)
+@Import(TestWebSecurityConfig::class)
 abstract class RestControllerTest {
     private val objectMapper = ObjectMapper()
 
@@ -41,6 +45,7 @@ abstract class RestControllerTest {
         this.mockMvc = MockMvcBuilders.webAppContextSetup(webApplicationContext)
             .addFilter<DefaultMockMvcBuilder>(CharacterEncodingFilter("UTF-8", true))
             .alwaysDo<DefaultMockMvcBuilder>(MockMvcResultHandlers.print())
+            .apply<DefaultMockMvcBuilder>(SecurityMockMvcConfigurers.springSecurity())
             .apply<DefaultMockMvcBuilder>(
                 MockMvcRestDocumentation.documentationConfiguration(
                     restDocumentationContextProvider
