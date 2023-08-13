@@ -25,7 +25,7 @@ class _HomeState extends State<Home> {
     _serviceProvider = Provider.of<ServiceProvider>(context, listen: false);
 
     // 계정정보 요청
-    _serviceProvider.fetchProfile('01077778888');
+    _serviceProvider.fetchProfile();
   }
 
   @override
@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
             if (value.profile == null) return Container();
 
             // 회원의 동네 리스트 불러오기
-            List<String> townList = value.profile!.town;
+            List<String> townList = value.profile!.regions;
 
             return PopupMenuButton<String>(
                 offset: Offset(0, 25),
@@ -104,7 +104,8 @@ class _HomeState extends State<Home> {
     if (articles.length > 0) {
       return ListView.separated(
           padding: EdgeInsets.symmetric(horizontal: 10),
-          physics: ClampingScrollPhysics(), // bounce 효과 제거
+          physics: ClampingScrollPhysics(),
+          // bounce 효과 제거
           itemBuilder: (BuildContext _context, int index) {
             return GestureDetector(
               onTap: () async {

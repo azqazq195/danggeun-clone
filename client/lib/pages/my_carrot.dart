@@ -22,7 +22,7 @@ class _MyCarrotState extends State<MyCarrot> {
 
     _serviceProvider = Provider.of<ServiceProvider>(context, listen: false);
     // 계정정보 요청
-    _serviceProvider.fetchProfile('01077778888');
+    _serviceProvider.fetchProfile();
   }
 
   @override
@@ -65,7 +65,7 @@ class _MyCarrotState extends State<MyCarrot> {
               width: 5,
             ),
             Text(
-              profile.nickName,
+              profile.nickname,
               style: TextStyle(fontSize: 20),
             ),
             Expanded(

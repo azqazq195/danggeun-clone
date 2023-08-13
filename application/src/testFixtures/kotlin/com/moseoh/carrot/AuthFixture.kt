@@ -48,11 +48,17 @@ object AuthFixture {
         email: String = "moseoh@danggeun.com",
         password: String = "password",
         nickname: String = "nickname",
+        phone: String = "01012345678",
+        profileUrl: String = "url",
+        regionIds: List<Long> = listOf(1, 2)
     ): SignUpRequest {
         return SignUpRequest(
             email,
             password,
-            nickname
+            nickname,
+            phone,
+            profileUrl,
+            regionIds
         )
     }
 
@@ -78,17 +84,25 @@ object AuthFixture {
 
     fun createMeResponse(
         id: Long = 1L,
+        role: Role = Role.USER,
         email: String = "moseoh@danggeun.com",
         nickname: String = "moseoh",
-        role: Role = Role.USER,
+        phone: String = "01012345678",
+        profileUrl: String = "url",
+        temperature: Double = 36.0,
+        regions: List<String> = listOf("도곡동", "삼평동"),
         createdAt: LocalDateTime = LocalDateTime.now(),
         modifiedAt: LocalDateTime = LocalDateTime.now()
     ): MeResponse {
         return MeResponse(
             id,
+            role,
             email,
             nickname,
-            role,
+            phone,
+            profileUrl,
+            temperature,
+            regions,
             createdAt,
             modifiedAt,
         )

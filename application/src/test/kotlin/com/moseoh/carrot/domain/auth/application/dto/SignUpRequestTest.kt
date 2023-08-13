@@ -95,5 +95,33 @@ class SignUpRequestTest : BehaviorSpec({
                 }
             }
         }
+
+        When("올바른 phone 값이 들어왔을 때") {
+            val dto = AuthFixture.createSignUpRequest(phone = "01012345678")
+            val result = validator.validate(dto)
+
+            Then("오류가 발생하지 않는다.") {
+                result.isEmpty() shouldBe true
+            }
+        }
+
+        When("올바르지 않은 phone 값이 들어왔을 때") {
+            val dtos = listOf(
+                AuthFixture.createSignUpRequest(phone = ""),
+                AuthFixture.createSignUpRequest(phone = "0101234567"),
+                AuthFixture.createSignUpRequest(phone = "0101234567890"),
+            )
+            val results = dtos.map { validator.validate(it) }
+
+            Then("오류가 발생한다.") {
+                results.forEach {
+                    it.size shouldBe 1
+                    val violation = it.first()
+
+                    violation.propertyPath.toString() shouldBe "phone"
+                    violation.message shouldBe "크기가 11에서 11 사이여야 합니다"
+                }
+            }
+        }
     }
 })
