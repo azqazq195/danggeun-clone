@@ -1,6 +1,7 @@
 package com.moseoh.carrot.domain.user.entity
 
 import com.moseoh.carrot._common.entity.BaseTimeEntity
+import com.moseoh.carrot.domain.region.entity.Region
 import jakarta.persistence.*
 
 @Entity

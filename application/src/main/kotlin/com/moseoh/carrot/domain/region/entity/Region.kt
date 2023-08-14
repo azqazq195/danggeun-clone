@@ -1,4 +1,4 @@
-package com.moseoh.carrot.domain.user.entity
+package com.moseoh.carrot.domain.region.entity
 
 import com.moseoh.carrot._common.entity.BaseEntity
 import jakarta.persistence.Entity

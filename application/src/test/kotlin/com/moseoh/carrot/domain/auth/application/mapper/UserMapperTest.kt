@@ -1,8 +1,8 @@
 package com.moseoh.carrot.domain.auth.application.mapper
 
 import com.moseoh.carrot.AuthFixture
-import com.moseoh.carrot.UserFixture
-import com.moseoh.carrot.domain.user.entity.repository.RegionRepository
+import com.moseoh.carrot.RegionFixture
+import com.moseoh.carrot.domain.region.entity.repository.RegionRepository
 import io.kotest.core.spec.style.BehaviorSpec
 import io.kotest.matchers.shouldBe
 import io.mockk.every
@@ -19,7 +19,7 @@ class UserMapperTest : BehaviorSpec({
     Given("dtoToEntity") {
         val signUpRequest = AuthFixture.createSignUpRequest()
         val encodedPassword = "encoded password"
-        val regions = listOf(UserFixture.createRegion(), UserFixture.createRegion("도곡동"))
+        val regions = listOf(RegionFixture.createRegion(), RegionFixture.createRegion("도곡동"))
 
         every { passwordEncoder.encode(signUpRequest.password) } returns encodedPassword
         every { regionRepository.findAllById(signUpRequest.regionIds) } returns regions
