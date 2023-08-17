@@ -3,3 +3,4 @@
 - [x] id 'java-test-fixtures'
 - [ ] SpringBootApplication scanBase vs ComponentScan
 - [ ] AccessDeniedHandler 필요성, 정리, 인증 인가 처리 알아보기
+- [ ] AuthService, JwtProvider `@Transactional` 정리
