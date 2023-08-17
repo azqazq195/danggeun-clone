@@ -5,7 +5,9 @@ import io.kotest.core.spec.style.BehaviorSpec
 import io.mockk.clearAllMocks
 
 @SpringBootTestWithConfig
-abstract class ServiceTest(body: BehaviorSpec.() -> Unit = {}) : BehaviorSpec({
+abstract class ServiceTest(
+    body: BehaviorSpec.() -> Unit = {}
+) : BehaviorSpec({
     afterTest {
         clearAllMocks()
     }
