@@ -1,5 +1,9 @@
 version: '3.8'
 
+networks:
+  carrot-network:
+    driver: bridge
+
 services:
   cache:
     container_name: carrot-cache
@@ -9,6 +13,8 @@ services:
       - "6379:6379"
     volumes:
       - ./redis/volume:/data
+    networks:
+      - carrot-network
 
   database:
     container_name: carrot-database
@@ -28,3 +34,43 @@ services:
       - TZ=Asia/Seoul
     volumes:
       - ./mysql/volume:/var/lib/mysql
+    networks:
+      - carrot-network
+
+  app:
+    build:
+      context: ..
+      dockerfile: ./Dockerfile
+    restart: always
+    depends_on:
+      - database
+      - cache
+    ports:
+      - "8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/carrot
+      SPRING_DATASOURCE_USERNAME: carrot
+      SPRING_DATASOURCE_PASSWORD: carrot
+    deploy:
+      resources:
+        limits:
+          cpus: "0.20"
+          memory: "1024M"
+        reservations:
+          cpus: "0.20"
+          memory: "1024M"
+    networks:
+      - carrot-network
+
+  nginx:
+    container_name: carrot-loadbalancer
+    image: nginx:latest
+    restart: always
+    ports:
+      - "8080:80"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+      - app
+    networks:
+      - carrot-network

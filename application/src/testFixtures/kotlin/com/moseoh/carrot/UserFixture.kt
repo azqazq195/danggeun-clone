@@ -1,6 +1,6 @@
 package com.moseoh.carrot
 
-import com.moseoh.carrot.domain.user.entity.Region
+import com.moseoh.carrot.domain.region.entity.Region
 import com.moseoh.carrot.domain.user.entity.Role
 import com.moseoh.carrot.domain.user.entity.User
 
@@ -12,7 +12,7 @@ object UserFixture {
         nickname: String = "nickname",
         phone: String = "01012345678",
         profileUrl: String? = "url",
-        regions: List<Region> = listOf(createRegion(), createRegion("도곡동")),
+        regions: List<Region> = listOf(RegionFixture.createRegion(), RegionFixture.createRegion("도곡동")),
     ): User {
         return User(
             role,
@@ -22,14 +22,6 @@ object UserFixture {
             phone,
             profileUrl,
             regions,
-        )
-    }
-
-    fun createRegion(
-        name: String = "삼평동"
-    ): Region {
-        return Region(
-            name
         )
     }
 }

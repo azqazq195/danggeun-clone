@@ -5,22 +5,15 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/carrot
-    username: carrot
-    password: carrot
 
   data:
     redis:
-      host: localhost
+      host: cache
       port: 6379
 
   jpa:
     hibernate:
-      ddl-auto: create-drop
-    properties:
-      hibernate:
-        format_sql: true
-    show-sql: true
+      ddl-auto: validate
 
 jwt:
   access-secret: and0LWV4YW1wbGUtYWNjZXNzLXRva2VuLXNlY3JldC1rZXk=

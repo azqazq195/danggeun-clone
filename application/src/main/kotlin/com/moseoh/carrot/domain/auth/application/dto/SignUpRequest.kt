@@ -1,7 +1,7 @@
 package com.moseoh.carrot.domain.auth.application.dto
 
 import com.moseoh.carrot.domain.auth.application.dto.constraints.EmailValidation
-import com.moseoh.carrot.domain.user.entity.Region
+import com.moseoh.carrot.domain.region.entity.Region
 import com.moseoh.carrot.domain.user.entity.User
 import jakarta.validation.constraints.NotBlank
 import jakarta.validation.constraints.Size

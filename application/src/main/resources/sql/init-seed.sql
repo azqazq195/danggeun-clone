@@ -9,11 +9,35 @@ VALUES (36.0,
         '01012345678',
         'url',
         'USER');
+
 INSERT INTO region (id, name)
-values (1, '삼평동');
+values (1, '경기도');
+INSERT INTO region (id, name, parent_id)
+values (2, '성남시', 1);
+INSERT INTO region (id, name, parent_id)
+values (3, '분당구', 2);
+INSERT INTO region (id, name, parent_id)
+values (4, '삼평동', 3);
+INSERT INTO region (id, name, parent_id)
+values (5, '정자동', 3);
+INSERT INTO region (id, name, parent_id)
+values (6, '수내동', 3);
+
 INSERT INTO region (id, name)
-values (2, '도곡동');
-INSERT INTO user_regions(region_id, user_id)
-VALUES (1, 1);
-INSERT INTO user_regions(region_id, user_id)
-VALUES (2, 1);
+values (7, '서울특별시');
+INSERT INTO region (id, name, parent_id)
+values (8, '강남구', 7);
+INSERT INTO region (id, name, parent_id)
+values (9, '도곡동', 8);
+INSERT INTO region (id, name, parent_id)
+values (10, '대치동', 8);
+
+INSERT INTO user_regions(user_id, region_id)
+VALUES (1, 4);
+INSERT INTO user_regions(user_id, region_id)
+VALUES (1, 10);
+
+INSERT INTO category (id, name)
+values (1, '가전');
+INSERT INTO category (id, name, parent_id)
+values (2, '컴퓨터', 1);

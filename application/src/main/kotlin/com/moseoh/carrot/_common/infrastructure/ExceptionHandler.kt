@@ -2,6 +2,7 @@ package com.moseoh.carrot._common.infrastructure
 
 import com.moseoh.carrot._common.dto.EmptyResult
 import com.moseoh.carrot._common.dto.ResponseDto
+import com.moseoh.carrot._common.exception.ApiException
 import com.moseoh.carrot._common.exception.ErrorCode
 import com.moseoh.carrot._common.utils.logger
 import org.springframework.core.annotation.Order
@@ -15,6 +16,12 @@ import org.springframework.web.bind.annotation.RestControllerAdvice
 @RestControllerAdvice
 class ExceptionHandler {
     private val logger = logger()
+
+    // Api Exception
+    @ExceptionHandler(ApiException::class)
+    fun handleApiException(e: ApiException): ResponseEntity<EmptyResult> {
+        return ResponseDto.of(e.errorCode)
+    }
 
     // Request Dto 양식이 올바르지 않는 경우 발생
     @ExceptionHandler(HttpMessageNotReadableException::class)

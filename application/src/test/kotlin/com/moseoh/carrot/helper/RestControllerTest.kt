@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs
 import org.springframework.context.annotation.Import
+import org.springframework.data.domain.Pageable
 import org.springframework.http.HttpHeaders
 import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
@@ -55,6 +56,19 @@ abstract class RestControllerTest {
                     .withResponseDefaults(Preprocessors.prettyPrint())
             )
             .build()
+    }
+
+    fun MockHttpServletRequestBuilder.searchParam(dto: Any): MockHttpServletRequestBuilder {
+        val params = objectMapper.convertValue(dto, Map::class.java) as Map<*, *>
+        params.forEach { (k, v) -> this.param(k.toString(), v.toString()) }
+        return this
+    }
+
+    fun MockHttpServletRequestBuilder.pageable(pageable: Pageable): MockHttpServletRequestBuilder {
+        this.param("page", pageable.pageNumber.toString())
+        this.param("size", pageable.pageSize.toString())
+        this.param("sort", pageable.sort.toString())
+        return this
     }
 
     fun MockHttpServletRequestBuilder.body(value: Any): MockHttpServletRequestBuilder {
