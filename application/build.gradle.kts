@@ -8,6 +8,7 @@ plugins {
     kotlin("jvm") version "1.9.0"
     kotlin("plugin.spring") version "1.9.0"
     kotlin("plugin.jpa") version "1.9.0"
+    kotlin("kapt") version "1.9.0"
 }
 
 group = "com.moseoh"
@@ -21,13 +22,14 @@ repositories {
     mavenCentral()
 }
 
-val kotestVersion = "5.6.2"
-val jwtVersion = "0.11.5"
-
 val asciidoctorExt: Configuration by configurations.creating
 val snippetsDir by extra { "build/generated-snippets" }
 
 dependencies {
+    val querydslVersion = "5.0.0"
+    val kotestVersion = "5.6.2"
+    val jwtVersion = "0.11.5"
+
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 
     // spring
@@ -37,6 +39,10 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-data-redis")
+
+    // querydsl
+    implementation("com.querydsl:querydsl-jpa:$querydslVersion:jakarta")
+    kapt("com.querydsl:querydsl-apt:$querydslVersion:jakarta")
 
     // jwt
     implementation("io.jsonwebtoken:jjwt-api:$jwtVersion")
