@@ -10,14 +10,14 @@ import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.*
 
 @WebMvcTestWithConfig(AuthController::class)
-class AuthControllerTest : RestControllerTest() {
-
-    @MockkBean
-    private lateinit var authService: AuthService
+class AuthControllerTest @Autowired constructor(
+    @MockkBean val authService: AuthService,
+) : RestControllerTest() {
 
     @Test
     fun signIn() {
