@@ -6,4 +6,4 @@
 # --scale container 갯수 설정
 #./gradlew build
 
-docker-compose -f ./docker/docker-compose.yml -p carrot up -d --scale app=2
+docker-compose -f ./docker/docker-compose-dev.yml -p carrot-dev up -d --scale app=2
